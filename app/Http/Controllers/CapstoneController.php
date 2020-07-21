@@ -48,11 +48,11 @@ class CapstoneController extends Controller
     	$new_collection->category_id = $request->category_id;
 
     	$image = $request->file('image');
-    	$image_name = time() . "." . $image->getClientOriginalExtension();
-    	$destination = "images/";
-    	$image->move($destination, $image_name);
-
-    	$new_collection->img_path = $destination.$image_name;
+        $image_name = time() . "." . $image->getClientOriginalExtension();
+        $imagefinal = $image->storeAs('photos',$image_name, 's3');
+        Storage::disk('s3')->setVisibility($imagefinal, 'public');
+        
+    	$new_collection->img_path = $imagefinal;
 
     	$new_collection->save();
 
