@@ -10,7 +10,7 @@
             <div class="card-columns">
                 @foreach($collections as $indiv_collection)
                 <div class="card card-container border-0">
-                    <img src="{{$indiv_collection->img_path}}" class="card-img-top card-img image" alt="...">
+                    <img src="{{env('AWS_URL')}}{{$indiv_collection->img_path}}" class="card-img-top card-img image" alt="...">
                     <p class="text-center">{{$indiv_collection->description}}</p>
                     @auth
                     @if(Auth::user()->role_id===3)
