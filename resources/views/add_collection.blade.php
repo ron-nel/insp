@@ -28,7 +28,7 @@
 					<div class="card-columns overflow-auto">
 						@foreach($collections as $collection)
 						<div class="card card-container my-2 border-0">
-							<img src="{{env(AWS_URL)}}{{asset($collection->img_path)}}" class="card-img-top image" alt="...">
+							<img src="{{env('AWS_URL')}}{{asset($collection->img_path)}}" class="card-img-top image" alt="...">
 							<p class="text-center">{{$collection->description}}</p>
 							<div class="cardBtn btn-container">
 								<a href="/admin/collection_edit/{{$collection->id}}" class="btn btn-insp btn-sm edit">Update</a>
