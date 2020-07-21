@@ -10,6 +10,7 @@ use \App\User;
 use \App\Journal;
 use \App\Status;
 use Auth;
+use Storage;
 
 class CapstoneController extends Controller
 {
@@ -61,7 +62,9 @@ class CapstoneController extends Controller
     }
 
     public function deleteCollection($id) {
-    	$collectionToDelete = Collection::find($id);
+        $collectionToDelete = Collection::find($id);
+        $file = $collectionToDelete->img_path;
+        Storage::disk('s3')->delete($file);
     	$collectionToDelete->delete();
     	return redirect('/collection');
     }
