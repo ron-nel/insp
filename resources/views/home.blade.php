@@ -24,7 +24,7 @@
 			<div class="card-columns overflow-auto p-3">
 				@foreach($collections as $indiv_collection)
 				<div class="card card-container my-2 border-0">
-					<img src="{{$indiv_collection->img_path}}" class="card-img-top card-img image" alt="...">
+					<img src="{{env('AWS_URL')}}{{$indiv_collection->img_path}}" class="card-img-top card-img image" alt="...">
 					<p class="text-center">{{$indiv_collection->description}}</p>
 				</div>
 				@endforeach
