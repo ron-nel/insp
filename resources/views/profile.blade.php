@@ -63,7 +63,7 @@
             <div class="card-columns">
                 @foreach($collections as $collection)
                 <div class="card m-2 card-container border-0">
-                    <img src="{{$collection->img_path}}" class="card-img-top image" alt="...">
+                    <img src="{{env('AWS_URL')}}{{$collection->img_path}}" class="card-img-top image" alt="...">
                     <p  class="text-center">{{$collection->description}}</p>
                     <div class="btn-container">
                         <form action="/deleteFromBoard/{{$collection->id}}" method="post" class="">
