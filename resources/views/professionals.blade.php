@@ -12,7 +12,7 @@
             <div class="card-columns">
                 @foreach($professionals as $professional)
                 <div class="card card-container">
-                    <img src="{{$professional->img_path}}" class="card-img-top card-img" alt="...">
+                    <img src="{{env('AWS_URL')}}{{$professional->img_path}}" class="card-img-top card-img" alt="...">
                     <div class="details text-center ">
                         <p>{{$professional->name}}</p>
                         <p>{{$professional->professional_title}}</p>

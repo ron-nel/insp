@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="img-container">
-                            <img src="{{$profiles->img_path}}" alt="" class="img-fluid img-profile">
+                            <img src="{{env('AWS_URL')}}{{$profiles->img_path}}" alt="" class="img-fluid img-profile">
                         </div>
                     </div>
                     <div class="col-4">

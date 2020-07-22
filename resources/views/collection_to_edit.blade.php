@@ -28,7 +28,7 @@
 				<div class="col-6 p-3 home-collection">
 					<div class="card overflow-auto border-0">
 						<div class="card card-container my-4 border-0">
-							<img src="{{env('AWS_URL')}}{{asset($collectionToEdit->img_path)}}" class="card-img-top" alt="...">
+							<img src="{{env('AWS_URL')}}{{$collectionToEdit->img_path}}" class="card-img-top" alt="...">
 							<p class="text-center">Name: {{$collectionToEdit->name}}</p>
 							<p class="text-center">Description: {{$collectionToEdit->description}}</p>
 						</div>

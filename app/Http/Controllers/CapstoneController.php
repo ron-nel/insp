@@ -75,8 +75,7 @@ class CapstoneController extends Controller
     }
 
     public function saveEdit($id, Request $request) {
-    	$item = Collection::find($id);
-    	// dd($item);
+        $item = Collection::find($id);
 
     	$rules = array(
     		"name" => "required",
@@ -91,11 +90,17 @@ class CapstoneController extends Controller
     	$item->category_id = $request->category_id;
 
     	if ($request->file('image') != null) {
-    		$image = $request->file('image');
+            
+            $image = $request->file('image');
     		$image_name = time() . "." . $image->getClientOriginalExtension();
-    		$destination = "images/";
-    		$image->move($destination, $image_name);
-    		$item->img_path = $destination.$image_name;
+            
+            $imagefinal = $image->storeAs('photos',$image_name, 's3');
+            Storage::disk('s3')->setVisibility($imagefinal, 'public');
+            
+            $file = $item->img_path;
+            Storage::disk('s3')->delete($file);
+            
+    	    $item->img_path = $imagefinal;
     	}
 
     	$item->save();
@@ -134,11 +139,17 @@ class CapstoneController extends Controller
 
 
     	$image = $request->file('image');
-    	$image_name = time() . "." . $image->getClientOriginalExtension();
-    	$destination = "images/";
-    	$image->move($destination, $image_name);
+    	// $image_name = time() . "." . $image->getClientOriginalExtension();
+    	// $destination = "images/";
+    	// $image->move($destination, $image_name);
 
-    	$new_profile->img_path = $destination.$image_name;
+        // $new_profile->img_path = $destination.$image_name;
+        
+        $image_name = time() . "." . $image->getClientOriginalExtension();
+        $imagefinal = $image->storeAs('profileImages',$image_name, 's3');
+        Storage::disk('s3')->setVisibility($imagefinal, 'public');
+        
+    	$new_profile->img_path = $imagefinal;
 
     	$new_profile->save();
 
